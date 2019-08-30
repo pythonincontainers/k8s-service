@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: one-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      special: selector
+  template:
+    metadata:
+      labels:
+        special: selector
+    spec:
+      containers:
+      - name: display-env
+        image: pythonincontainers/k8s-env:v1.0
+        ports:
+        - containerPort: 5000
+        env:
+          - name: Environment
+            value: One Pod

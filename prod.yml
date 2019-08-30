@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8s-env
+      env: production
+  template:
+    metadata:
+      labels:
+        app: k8s-env
+        env: production
+    spec:
+      containers:
+      - name: display-env
+        image: pythonincontainers/k8s-env:v1.0
+        ports:
+        - containerPort: 5000
+        env:
+          - name: Environment
+            value: Production
